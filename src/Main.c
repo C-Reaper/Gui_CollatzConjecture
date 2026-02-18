@@ -22,10 +22,10 @@ void Update(AlxWindow* w){
 	TransformedView_HandlePanZoom(&cc.tv,w->Strokes,GetMouse());
 
 	if(Stroke(ALX_KEY_W).PRESSED){
-		cc.depth++;
+		cc.depth += cc.depth / 2;
 	}
 	if(Stroke(ALX_KEY_S).PRESSED){
-		if(cc.depth > 0U) cc.depth--;
+		if(cc.depth > 1U) cc.depth -= cc.depth / 2;
 	}
 	if(Stroke(ALX_KEY_E).PRESSED){
 		CollatzConjecture_Update(&cc);
