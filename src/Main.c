@@ -13,22 +13,32 @@
 #error "Platform not supported!"
 #endif
 
-
-const int count = 100;
-CollatzConjecture wrp;
+CollatzConjecture cc;
 
 void Setup(AlxWindow* w){
-	wrp = CollatzConjecture_New(F32_PI * 0.1f,1.0f);
+	cc = CollatzConjecture_New(10000U,10000U,F32_PI * 0.1f,1.0f);
 }
 void Update(AlxWindow* w){
-	CollatzConjecture_Update(&wrp);
+	TransformedView_HandlePanZoom(&cc.tv,w->Strokes,GetMouse());
+
+	if(Stroke(ALX_KEY_W).PRESSED){
+		cc.depth++;
+	}
+	if(Stroke(ALX_KEY_S).PRESSED){
+		if(cc.depth > 0U) cc.depth--;
+	}
+	if(Stroke(ALX_KEY_E).PRESSED){
+		CollatzConjecture_Update(&cc);
+	}
 
 	Clear(BLACK);
 
-	CollatzConjecture_Render(&wrp,WINDOW_STD_ARGS,0.0f,0.0f);
+	CollatzConjecture_Render(&cc,WINDOW_STD_ARGS,0.0f,0.0f);
+
+	CStr_RenderAlxFontf(WINDOW_STD_ARGS,GetAlxFont(),0.0f,0.0f,RED,"Depth: %d",cc.depth);
 }
 void Delete(AlxWindow* w){
-	CollatzConjecture_Free(&wrp);
+	CollatzConjecture_Free(&cc);
 }
 
 int main(){
