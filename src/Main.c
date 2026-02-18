@@ -42,7 +42,7 @@ void Delete(AlxWindow* w){
 }
 
 int main(){
-    if(Create("Fire Pool",1900,1000,1,1,Setup,Update,Delete))
+    if(Create("Collatz Conjecture",1900,1000,1,1,Setup,Update,Delete))
         Start();
     return 0;
 }
