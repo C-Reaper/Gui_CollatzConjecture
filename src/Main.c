@@ -17,6 +17,7 @@ CollatzConjecture cc;
 
 void Setup(AlxWindow* w){
 	cc = CollatzConjecture_New(10000U,10000U,F32_PI * 0.1f,1.0f);
+	CollatzConjecture_Update(&cc);
 }
 void Update(AlxWindow* w){
 	TransformedView_HandlePanZoom(&cc.tv,w->Strokes,GetMouse());
